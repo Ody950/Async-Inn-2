@@ -38,3 +38,8 @@ Table 5:
 AmenitiesTable:  have primary key (AmenitiesID) ,air conditioning, coffee maker, ocean view, mini bar, RoomID, and have relationship is (one to many) with Room Amenities table. where every room have many Amenities by room Amenities use .
 
 <img src="./Async-Inn-2/Data/6.jpg" style="width: 400px;">
+
+
+# Lab12 : MVC and EF Get Started
+
+We create ASP.NET Core Empty project in VS and start to use MVC, Where we creat Models folder and insid it we creat all the classes for table, after that we create a new Data and add a new AsyncInnDbContext, it work as a bridge between our domain or entity classes and the database. After the database is registered, and a single table property inside of our dbContext file, we create a new migration to see the script that generates and adds that table to the database.
