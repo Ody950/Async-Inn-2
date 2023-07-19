@@ -21,6 +21,7 @@ namespace Async_Inn_2.Controllers
             _context = context;
         }
 
+
         // GET: api/Hotels
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetHotels()
