@@ -6,7 +6,7 @@ This ERD will be used during Async Inn project. The Hotel table allows us to cre
 
 # ERD:
 
-<img src="./Async-Inn-2/Data/1.jpg" style="width: 1000px;">
+<img src="./Async-Inn-2/Data/1.jpg" style="width: 2000px;">
 
 # Explanation :
 Table 1:
