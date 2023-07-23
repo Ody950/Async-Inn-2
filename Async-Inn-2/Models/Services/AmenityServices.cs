@@ -38,7 +38,7 @@ namespace Async_Inn_2.Models.Services
             return amenity;
         }
 
-        // Update Amenity by ID........................................................................
+        // Update Amenity by ID.......................................................................
 
 
         public async Task<Amenity> UpdateAmenity(int id, Amenity updateAmenity)
@@ -49,7 +49,7 @@ namespace Async_Inn_2.Models.Services
         }
 
 
-        // Delete Amenity by ID........................................................................
+        // Delete Amenity by ID.......................................................................
 
         public async Task DeleteAmenity(int id)
         {
