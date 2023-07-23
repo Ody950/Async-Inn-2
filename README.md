@@ -4,15 +4,16 @@
 
 This ERD will be used during Async Inn project. The Hotel table allows us to create a properties for the hotel branch. The Hotel id is passed to the Rooms table , where the Rooms  get another id from room and used to create a unique room. The unique room is have amenities like air conditioning”, “coffee maker”, “ocean view”, “mini bar”.
 
-# ERD:
-
-<img src="./Async-Inn-2/Data/Image/lab12/1.png" style="width: 1000px;">
-
 
 | Contents | Link |
 | -------- | -------- |
-| Read: Lab 13 | [Read-Lab 13](./Async-Inn-2/Async-Inn-2/Data/Image/Lab13.md) |
+| Read: Lab 13 | [Read-Lab 13](./Async-Inn-2/Data/Image/Lab13.md) |
 
+
+
+# ERD:
+
+<img src="./Async-Inn-2/Data/Image/lab12/1.png" style="width: 1000px;">
 
 # Explanation :
 Table 1:
