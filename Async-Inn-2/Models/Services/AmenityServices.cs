@@ -22,7 +22,7 @@ namespace Async_Inn_2.Models.Services
             return newAmenity;
         }
 
-        // Get Amenities........................................................................
+        // Get Amenities.......................................................................
 
         public async Task<List<Amenity>> GetAmenities()
         {
