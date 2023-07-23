@@ -3,7 +3,7 @@
 # Hotels
 
 ## GET 
-
+<img src="./Image/lab13/Hotel/11.jpg" style="width: 1000px;">
 
 ## GET by id
 
