@@ -8,6 +8,12 @@ This ERD will be used during Async Inn project. The Hotel table allows us to cre
 
 <img src="./Async-Inn-2/Data/Image/lab12/1.png" style="width: 1000px;">
 
+
+| Contents | Link |
+| -------- | -------- |
+| Read: Lab 13 | [Read-Lab 13](./Async-Inn-2/Async-Inn-2/Data/Image/Lab13.md) |
+
+
 # Explanation :
 Table 1:
 
