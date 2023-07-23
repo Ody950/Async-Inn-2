@@ -4,7 +4,7 @@
 
 ## GET 
 
-<img src="./Async-Inn-2/Data/Image/lab13/Hotel/11.jpg" style="width: 400px;">
+<img src="../Async-Inn-2/Data/Image/lab13/Hotel/11.jpg" style="width: 400px;">
 
 ## GET by id
 
@@ -12,11 +12,11 @@
 
 ## Update
 
-<img src="./Async-Inn-2/Data/Image/lab13/Hotel/13.jpg" style="width: 400px;">
+<img src="../Async-Inn-2/Data/Image/lab13/Hotel/13.jpg" style="width: 400px;">
 
 ## Delete
 
-<img src="./Async-Inn-2/Data/Image/lab13/Hotel/14.jpg" style="width: 400px;">
+<img src="../Async-Inn-2/Data/Image/lab13/Hotel/14.jpg" style="width: 400px;">
 
 
 # Rooms
