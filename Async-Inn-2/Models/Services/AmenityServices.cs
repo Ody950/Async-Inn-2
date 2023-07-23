@@ -38,7 +38,6 @@ namespace Async_Inn_2.Models.Services
             return amenity;
         }
 
-
         // Update Amenity by ID........................................................................
 
 
