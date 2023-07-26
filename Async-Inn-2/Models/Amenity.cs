@@ -4,5 +4,9 @@
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+        // Navigation Proparites
+
+        public List<RoomAmenity> RoomAmenity { get; set; }
     }
 }
