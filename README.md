@@ -8,7 +8,7 @@ This ERD will be used during Async Inn project. The Hotel table allows us to cre
 | Contents | Link |
 | -------- | -------- |
 | Read: Lab 13 | [Read-Lab 13](./Async-Inn-2/Data/Image/Lab13.md) |
-
+| Read: Lab 14 | [Read-Lab 14](./Async-Inn-2/Data/Image/Lab14.md) |
 
 
 # ERD:
