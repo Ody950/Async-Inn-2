@@ -15,6 +15,8 @@
 
         public string Phone { get; set; }
 
+        // Navigation Proparites
 
+        public List<HotelRoom> HotelRoom { get; set; }
     }
 }

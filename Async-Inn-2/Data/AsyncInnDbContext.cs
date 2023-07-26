@@ -37,10 +37,22 @@ namespace Async_Inn_2.Data
 
 
                 );
+
+
+            modelBuilder.Entity<RoomAmenity>().HasKey(RoomAmenity => new { RoomAmenity.RoomID, RoomAmenity.AmenityID });
+
+            modelBuilder.Entity<HotelRoom>().HasKey(HotelRoomNumber => new { HotelRoomNumber.HotelID, HotelRoomNumber.RoomNumber });
+
         }
 
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Amenity> Amenities { get; set; }
+        public DbSet<RoomAmenity> RoomAmenity { get; set; }
+        public DbSet<HotelRoom> HotelRoom { get; set; }
+
+
+
+
     }
 }

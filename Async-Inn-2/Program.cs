@@ -29,6 +29,7 @@ namespace Async_Inn_2
             builder.Services.AddTransient<IAmenity, AmenityServices>();
             builder.Services.AddTransient<IRoom, RoomServices>();
             builder.Services.AddTransient<IHotel, HotelServices>();
+            builder.Services.AddTransient<IHotelRoom, HotelRoomServices>();
 
 
 
