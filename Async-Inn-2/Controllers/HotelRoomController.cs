@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Async_Inn_2.Data;
 using Async_Inn_2.Models;
 using Async_Inn_2.Models.Interfaces;
+using Async_Inn_2.Models.DTOs;
 
 namespace Async_Inn_2.Controllers
 {
-    [Route("api/Hotels/{hotelId}/Rooms")]
+    [Route("api/[controller]")]
     [ApiController]
     public class HotelRoomController : ControllerBase
     {
@@ -24,8 +25,8 @@ namespace Async_Inn_2.Controllers
         }
 
         // GET: api/Hotels/{hotelId}/Rooms
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRooms()
+        [HttpGet("{hotelId}/Rooms")]
+        public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRooms()
         {
             var rooms = await _hotelroom.GetHotelRooms();
 
@@ -37,8 +38,8 @@ namespace Async_Inn_2.Controllers
         }
 
         // GET: api/Hotels/{hotelId}/Rooms/{roomNumber}
-        [HttpGet("{roomNumber}")]
-        public async Task<ActionResult<HotelRoom>> GetHotelRoom(int hotelid, int roomNumberid)
+        [HttpGet("{hotelId}/Rooms/{roomNumber}")]
+        public async Task<ActionResult<HotelRoomDTO>> GetHotelRoom(int hotelid, int roomNumberid)
         {
             var hotelRoom = await _hotelroom.GetHotelRoom(hotelid, roomNumberid);
             if (hotelRoom == null)
@@ -50,8 +51,8 @@ namespace Async_Inn_2.Controllers
 
         // PUT: api/Hotels/{hotelId}/Rooms/{roomNumber}
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{roomNumber}")]
-        public async Task<IActionResult> PutHotelRoom(int hotelid, int roomNumberid, HotelRoom hotelRoom)
+        [HttpPut("{hotelId}/Rooms/{roomNumber}")]
+        public async Task<IActionResult> PutHotelRoom(int hotelid, int roomNumberid, HotelRoomDTO hotelRoom)
         {
             if (hotelid != hotelRoom.HotelID && roomNumberid != hotelRoom.RoomNumber)
             {
@@ -65,8 +66,8 @@ namespace Async_Inn_2.Controllers
 
         // POST: api/Hotels/{hotelId}/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<HotelRoom>> PostHotelRoom(HotelRoom hotelRoom)
+        [HttpPost("{hotelId}/Rooms")]
+        public async Task<ActionResult<HotelRoomDTO>> PostHotelRoom(HotelRoomDTO hotelRoom)
         {
             if (hotelRoom == null)
             {
