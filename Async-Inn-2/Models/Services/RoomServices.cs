@@ -1,4 +1,5 @@
 ﻿using Async_Inn_2.Data;
+using Async_Inn_2.Models.DTOs;
 using Async_Inn_2.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,43 +16,76 @@ namespace Async_Inn_2.Models.Services
         }
 
         // CREATE........................................................................
-        public async Task<Room> CreateRoom(Room newRoom)
+        public async Task<RoomDTO> CreateRoom(RoomDTO newRoomDTO)
         {
-            _context.Rooms.Add(newRoom);
+            Room room = new Room
+            {
+                ID = newRoomDTO.ID,
+                Name = newRoomDTO.Name,
+                Layout = newRoomDTO.Layout,
+            };
+            _context.Rooms.Entry(room).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return newRoom;
+            return newRoomDTO;
         }
 
         // Get Amenities........................................................................
 
-        public async Task<List<Room>> GetRooms()
+        public async Task<List<RoomDTO>> GetRooms()
         {
 
-            var Rooms =  await _context.Rooms.Include(x => x.RoomAmenity)
-                                          .ThenInclude(y => y.Amenity)
-                                          .ToListAsync();
+            var Rooms =  await _context.Rooms.Select(x => new RoomDTO
+            {
+                ID = x.ID,
+                Name = x.Name,
+                Layout = x.Layout,
+                Amenities = x.RoomAmenity
+                 .Select(x => new AmenityDTO
+                   {
+                      ID = x.Amenity.ID,
+                      Name = x.Amenity.Name
+                   }).ToList()
+
+            }).ToListAsync();
+    
             return Rooms;
         }
 
         // Get Amenity by ID........................................................................
-        public async Task<Room> GetRoom(int id)
+        public async Task<RoomDTO> GetRoom(int id)
         {
-            var Room =  await _context.Rooms.Include(x => x.RoomAmenity)
-                                       .ThenInclude(y => y.Amenity)
-                                       .FirstOrDefaultAsync(x => x.ID == id);
-            return Room;
+            var Rooms = await _context.Rooms.Select(x => new RoomDTO
+            {
+                ID = x.ID,
+                Name = x.Name,
+                Layout = x.Layout,
+                Amenities = x.RoomAmenity
+                  .Select(x => new AmenityDTO
+                  {
+                      ID = x.Amenity.ID,
+                      Name = x.Amenity.Name
+                  }).ToList()
+
+            }).FirstOrDefaultAsync(x => x.ID == id);
+
+            return Rooms;
         }
 
 
         // Update Amenity by ID........................................................................
 
 
-        public async Task<Room> UpdateRoom(int id, Room updateRoom)
+        public async Task<RoomDTO> UpdateRoom(int id, RoomDTO updateRoomDTO)
         {
-            
-            _context.Entry(updateRoom).State = EntityState.Modified;
+            Room room = new Room
+            {
+                ID = updateRoomDTO.ID,
+                Name = updateRoomDTO.Name,
+                Layout = updateRoomDTO.Layout,
+            };
+            _context.Entry(room).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return updateRoom;
+            return updateRoomDTO;
         }
 
 
@@ -59,12 +93,9 @@ namespace Async_Inn_2.Models.Services
 
         public async Task DeleteRoom(int id)
         {
-            Room room = await GetRoom(id);
-            if (room != null)
-            {
-                _context.Rooms.Remove(room);
-                await _context.SaveChangesAsync();
-            }
+            Room room = await _context.Rooms.FindAsync(id);
+            _context.Entry(room).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
 
