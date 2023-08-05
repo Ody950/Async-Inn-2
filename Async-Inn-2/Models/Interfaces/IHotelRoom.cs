@@ -2,6 +2,12 @@
 
 namespace Async_Inn_2.Models.Interfaces
 {
+
+    // It uses the HotelRoomDTO class to transfer data between the controller
+    // and the service layer, and it asynchronous and return HotelRoomDTO
+    // objects or lists of them, and it include creating, getting, updating
+    // and deleting amenities by their ID.
+
     public interface IHotelRoom
     {
         // CREATE

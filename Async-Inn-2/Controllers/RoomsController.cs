@@ -61,7 +61,7 @@ namespace Async_Inn_2.Controllers
 
         // POST: api/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPost("{id}")]
         public async Task<ActionResult<RoomDTO>> PostRoom(RoomDTO room)
         {
             if (room == null)
@@ -93,7 +93,7 @@ namespace Async_Inn_2.Controllers
 
 
         //Delete Amenity:[Route("{roomId}/Amenity/{amenityId}")]
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [Route("{roomId}/{amenityId}")]
         public async Task<IActionResult> RemoveAmenityFromRoom(int roomId, int amenityId)
         {

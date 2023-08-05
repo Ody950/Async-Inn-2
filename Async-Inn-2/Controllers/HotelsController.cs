@@ -68,6 +68,10 @@ namespace Async_Inn_2.Controllers
             {
                 return Problem("Entity set 'AsyncInnDbContext.Hotels'  is null.");
             }
+            if (hotel.ID == null)
+            {
+                return NotFound();
+            }
             var newHotel = await _hotel.CreateHotel(hotel);
 
             return Ok(newHotel);

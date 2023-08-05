@@ -18,11 +18,19 @@ namespace Async_Inn_2.Models.Services
         }
 
         // CREATE........................................................................
+
+        /// <summary>
+        /// Creates a new hotel and adds it to the database.
+        /// </summary>
+        /// <param name="newHotelDTO">The hotel object to be created.</param>
+        /// <returns>A HotelDTO representing the created hotel.</returns>
+
+
         public async Task<HotelDTO> CreateHotel(HotelDTO newHotelDTO)
         {
             Hotel hotel = new Hotel
             {
-                ID = newHotelDTO.ID,
+                ID =  newHotelDTO.ID,
                 Name = newHotelDTO.Name,
                 StreetAddress = newHotelDTO.StreetAddress,
                 City = newHotelDTO.City,
@@ -37,8 +45,13 @@ namespace Async_Inn_2.Models.Services
             return newHotelDTO;
         }
 
-        // Get Amenities........................................................................
-
+        // Get Hotels........................................................................
+        /// <summary>
+        /// Retrieves a list of all hotels from the database along with their associated rooms and amenities.
+        /// Returns a list of HotelDTO objects representing all hotels and their rooms.
+        /// </summary>
+        /// <returns>A list of HotelDTO objects representing all hotels and their rooms.</returns>
+        
         public async Task<List<HotelDTO>> GetHotels()
         {
             var hotel = await _context.Hotels.Select(x => new HotelDTO()
@@ -74,7 +87,12 @@ namespace Async_Inn_2.Models.Services
             return hotel;
         }
 
-        // Get Amenity by ID........................................................................
+        // Get Hotel by ID........................................................................
+        /// <summary>
+        /// Retrieves a list of all hotels from the database.
+        /// </summary>
+        /// <returns>A list of HotelDTO, each representing a hotel and its rooms with amenities.</returns>
+
         public async Task<HotelDTO> GetHotel(int id)
         {
             var hotel = await _context.Hotels.Select(x => new HotelDTO()
@@ -111,8 +129,14 @@ namespace Async_Inn_2.Models.Services
         }
 
 
-        // Update Amenity by ID........................................................................
-
+        // Update Hotel by ID........................................................................
+        /// <summary>
+        /// Updates an existing hotel in the database by the given hotel ID and new Hotel object.
+        /// Returns the HotelDTO representing the hotel before the update.
+        /// </summary>
+        /// <param name="id">The ID of the hotel to update.</param>
+        /// <param name="updateHotelDTO">The updated Hotel object.</param>
+        /// <returns>The HotelDTO representing the hotel before the update.</returns>
 
         public async Task<HotelDTO> UpdateHotel(int id, HotelDTO updateHotelDTO)
         {
@@ -132,8 +156,13 @@ namespace Async_Inn_2.Models.Services
         }
 
 
-        // Delete Amenity by ID........................................................................
-
+        // Delete Hotel by ID........................................................................
+        /// <summary>
+        /// Deletes a hotel from the database based on the given id.
+        /// </summary>
+        /// <param name="id">The id of the hotel to be deleted.</param>
+       
+        
         public async Task DeleteHotel(int id)
         {
             Hotel hotel = await _context.Hotels.FindAsync(id);
