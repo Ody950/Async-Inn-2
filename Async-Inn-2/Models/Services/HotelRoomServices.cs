@@ -15,7 +15,11 @@ namespace Async_Inn_2.Models.Services
         }
 
         // CREATE........................................................................
-
+        /// <summary> 
+        /// Creates a new hotel room from a DTO and adds it to the database 
+        /// </summary> 
+        /// <param name=“hotelRoomDTO”>The DTO containing the hotel room information</param> 
+        /// <returns>The created hotel room as a DTO</returns> 
         public async Task<HotelRoomDTO> CreateHotelRoom(HotelRoomDTO hotelRoomDTO)
         {
             HotelRoom hotelRoom = new HotelRoom
@@ -34,7 +38,10 @@ namespace Async_Inn_2.Models.Services
         }
 
         // Get HotelRooms........................................................................
-
+        /// <summary> 
+        /// Returns a list of all hotel rooms as DTOs with their associated room and amenity details 
+        /// </summary> 
+        /// <returns>A list of hotel room DTOs</returns>
         public async Task<List<HotelRoomDTO>> GetHotelRooms()
         {
             var hotelRooms = await _context.HotelRoom.Select(x => new HotelRoomDTO()
@@ -61,7 +68,13 @@ namespace Async_Inn_2.Models.Services
         }
 
         // Get HotelRoom by ID........................................................................
-
+        // <summary> 
+        /// Returns a single hotel room by its hotel ID and room number as a DTO with its associated room and amenity details 
+        /// </summary> 
+        
+        /// <param name="hotelid"> The ID of the hotel to retrieve.</param> 
+        /// <param name="roomNumberid"> The number of the room to retrieve.</param> 
+        /// <returns>The hotel room DTO with the matching hotel ID and room number</returns> 
         public async Task<HotelRoomDTO> GetHotelRoom(int hotelid, int roomNumberid)
         {
             var hotelRoom = await _context.HotelRoom.Select(x => new HotelRoomDTO()
@@ -87,12 +100,19 @@ namespace Async_Inn_2.Models.Services
 
             return hotelRoom;
         }
-    
+
 
 
 
         // Update HotelRoom by ID........................................................................
-
+        /// <summary>
+        /// Updates an existing hotel room in the database by the given hotel ID, room number, and new HotelRoom object.
+        /// Returns the HotelRoomDTO representing the hotel room before the update.
+        /// </summary>
+        /// <param name="hotelid">The ID of the hotel to which the room belongs.</param>
+        /// <param name="roomNumberid">The room number of the hotel room to update.</param>
+        /// <param name="hotelRoomDTO">The updated HotelRoom object.</param>
+        /// <returns>The HotelRoomDTO representing the hotel room before the update.</returns>
 
         public async Task<HotelRoomDTO> UpdateHotelRoom(int hotelid, int roomNumberid, HotelRoomDTO hotelRoomDTO)
         {
@@ -115,6 +135,12 @@ namespace Async_Inn_2.Models.Services
 
 
         // Delete HotelRoom by ID........................................................................
+        /// <summary>
+        /// Deletes a hotel room from the database based on the given hotel id and room number.
+        /// </summary>
+        /// <param name="hotelid">The id of the hotel associated with the hotel room to be deleted.</param>
+        /// <param name="roomNumberid">The room number of the hotel room to be deleted.</param>
+       
 
         public async Task DeleteHotelRoom(int hotelid, int roomNumberid)
         {

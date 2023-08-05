@@ -10,7 +10,7 @@
 
         // Navigation Proparites
 
-        public List<RoomAmenity> RoomAmenity { get; set; }
-        public List<HotelRoom> HotelRoom { get; set; }
+        public List<RoomAmenity>? RoomAmenity { get; set; }
+        public List<HotelRoom>? HotelRoom { get; set; }
     }
 }
