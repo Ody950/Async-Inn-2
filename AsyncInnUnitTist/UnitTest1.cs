@@ -267,8 +267,6 @@ namespace AsyncInnUnitTist
 
         }
 
-
-
         [Fact]
         public async Task UpdateHotel()
         {
