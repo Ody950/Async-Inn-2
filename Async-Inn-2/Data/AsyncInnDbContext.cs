@@ -1,9 +1,10 @@
 ﻿using Async_Inn_2.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Async_Inn_2.Data
 {
-    public class AsyncInnDbContext : DbContext
+    public class AsyncInnDbContext : IdentityDbContext<ApplicationUser>
     {
         public AsyncInnDbContext(DbContextOptions Options) : base(Options) 
         {
@@ -13,6 +14,12 @@ namespace Async_Inn_2.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
+            base.OnModelCreating(modelBuilder);
+
+
+
             modelBuilder.Entity<Hotel>().HasData(
 
                 new Hotel() { ID = 1, Name = "Hotel-1", StreetAddress = "Amman Street 1", City = "Amman-1", State = "Amman-1", Country = "Jordan", Phone = "+962 798998989" },
