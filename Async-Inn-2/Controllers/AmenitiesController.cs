@@ -9,9 +9,12 @@ using Async_Inn_2.Data;
 using Async_Inn_2.Models;
 using Async_Inn_2.Models.Interfaces;
 using Async_Inn_2.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Async_Inn_2.Controllers
 {
+    [Authorize(Roles = "District Manager")]
     [Route("api/[controller]")]
     [ApiController]
     public class AmenitiesController : ControllerBase
@@ -24,6 +27,7 @@ namespace Async_Inn_2.Controllers
         }
 
         // GET: api/Amenities
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
@@ -32,6 +36,7 @@ namespace Async_Inn_2.Controllers
         }
 
         // GET: api/Amenities/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<AmenityDTO>> GetAmenity(int id)
         {
@@ -47,6 +52,7 @@ namespace Async_Inn_2.Controllers
 
         // PUT: api/Amenities/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "District Manager, Property Manager, Agent")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAmenity(int id, AmenityDTO amenity)
         { 
