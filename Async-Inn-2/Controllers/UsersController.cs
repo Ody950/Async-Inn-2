@@ -1,5 +1,6 @@
 ﻿using Async_Inn_2.Models.DTOs;
 using Async_Inn_2.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,7 @@ namespace Async_Inn_2.Controllers
             userService = service;
         }
 
+        [Authorize(Roles = "District Manager")]
         [HttpPost("Register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterUserDTO data)
         {
@@ -26,20 +28,26 @@ namespace Async_Inn_2.Controllers
             }
 
             return BadRequest(new ValidationProblemDetails(ModelState));
-
-            //throw new NotImplementedException();
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDto)
+        public async Task<ActionResult<UserDTO>> Login(LoginDTO data)
         {
-            var user = await userService.Authenticate(loginDto.Username, loginDto.Password);
-
-            if (user == null)
+            var user = await userService.Authenticate(data.Username, data.Password);
+            if (user != null)
             {
-                return Unauthorized();
+                return user;
             }
-            return user;
+            return Unauthorized();
+        }
+
+        
+        //[Authorize(Roles = "Admin")]
+        [Authorize(Policy = "create")]
+        [HttpGet("Profile")]
+        public async Task<ActionResult<UserDTO>> Profile()
+        {
+            return await userService.GetUser(this.User); ;
         }
     }
 }

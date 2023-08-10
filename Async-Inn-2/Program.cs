@@ -3,6 +3,8 @@ using Async_Inn_2.Data;
 using Async_Inn_2.Models;
 using Async_Inn_2.Models.Interfaces;
 using Async_Inn_2.Models.Services;
+using FluentAssertions.Common;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +36,29 @@ namespace Async_Inn_2
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<AsyncInnDbContext>();
 
+            builder.Services.AddScoped<JwtTokenService>();
+
+            // This will eventually allow us to "Decorate" (Annotate) our routes
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+              .AddJwtBearer(options =>
+              {
+                  options.TokenValidationParameters = JwtTokenService.GetValidationParameters(builder.Configuration);
+              });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                // Add "Name of Policy", and the Lambda returns a definition
+                options.AddPolicy("create", policy => policy.RequireClaim("permissions", "create"));
+                options.AddPolicy("update", policy => policy.RequireClaim("permissions", "update"));
+                options.AddPolicy("delete", policy => policy.RequireClaim("permissions", "delete"));
+                options.AddPolicy("deposit", policy => policy.RequireClaim("permissions", "deposit"));
+            });
+
 
             builder.Services.AddTransient<IUser, IdentityUserService>();
             builder.Services.AddTransient<IAmenity, AmenityServices>();
@@ -54,7 +79,9 @@ namespace Async_Inn_2
 
 
             var app = builder.Build();
-            
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseSwagger(aptions =>
             {
