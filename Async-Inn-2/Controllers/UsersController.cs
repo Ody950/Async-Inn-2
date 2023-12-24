@@ -1,10 +1,9 @@
-﻿using Async_Inn_2.Models.DTOs;
-using Async_Inn_2.Models.Interfaces;
+﻿using JWT_D.Models.DTOs;
+using JWT_D.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Async_Inn_2.Controllers
+namespace JWT_D.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -16,7 +15,7 @@ namespace Async_Inn_2.Controllers
             userService = service;
         }
 
-        [Authorize(Roles = "District Manager")]
+        //[Authorize(Roles = "Manager")]        <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         [HttpPost("Register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterUserDTO data)
         {
@@ -41,7 +40,7 @@ namespace Async_Inn_2.Controllers
             return Unauthorized();
         }
 
-        
+
         //[Authorize(Roles = "Admin")]
         [Authorize(Policy = "create")]
         [HttpGet("Profile")]

@@ -1,10 +1,10 @@
-﻿using Async_Inn_2.Models.DTOs;
+﻿using JWT_D.Models.DTOs;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
 
-namespace Async_Inn_2.Models.Interfaces
+namespace JWT_D.Models.Interfaces
 {
-    
+
     public interface IUser
     {
         public Task<UserDTO> Register(RegisterUserDTO registerUser, ModelStateDictionary modelState);

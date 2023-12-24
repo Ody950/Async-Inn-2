@@ -8,24 +8,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Async_Inn_2.Migrations
 {
     /// <inheritdoc />
-    public partial class Identity : Migration
+    public partial class odai : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Amenities",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Amenities", x => x.ID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -66,35 +53,16 @@ namespace Async_Inn_2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Hotels",
+                name: "Stocks",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Hotels", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Rooms",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Layout = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Rooms", x => x.ID);
+                    table.PrimaryKey("PK_Stocks", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -203,85 +171,39 @@ namespace Async_Inn_2.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "HotelRoom",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
                 {
-                    RoomNumber = table.Column<int>(type: "int", nullable: false),
-                    HotelID = table.Column<int>(type: "int", nullable: false),
-                    RoomID = table.Column<int>(type: "int", nullable: false),
-                    Rate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PetFriendly = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HotelRoom", x => new { x.HotelID, x.RoomNumber });
-                    table.ForeignKey(
-                        name: "FK_HotelRoom_Hotels_HotelID",
-                        column: x => x.HotelID,
-                        principalTable: "Hotels",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HotelRoom_Rooms_RoomID",
-                        column: x => x.RoomID,
-                        principalTable: "Rooms",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RoomAmenity",
-                columns: table => new
-                {
-                    AmenityID = table.Column<int>(type: "int", nullable: false),
-                    RoomID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoomAmenity", x => new { x.RoomID, x.AmenityID });
-                    table.ForeignKey(
-                        name: "FK_RoomAmenity_Amenities_AmenityID",
-                        column: x => x.AmenityID,
-                        principalTable: "Amenities",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RoomAmenity_Rooms_RoomID",
-                        column: x => x.RoomID,
-                        principalTable: "Rooms",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                    { "agent", "00000000-0000-0000-0000-000000000000", "Agent", "AGENT" },
+                    { "client", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" },
+                    { "manager", "00000000-0000-0000-0000-000000000000", "Manager", "MANAGER" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Amenities",
+                table: "Stocks",
                 columns: new[] { "ID", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Amenity-1" },
-                    { 2, "Amenity-2" },
-                    { 3, "Amenity-3" }
+                    { 1, "Stock-1" },
+                    { 2, "Stock-2" },
+                    { 3, "Stock-3" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Hotels",
-                columns: new[] { "ID", "City", "Country", "Name", "Phone", "State", "StreetAddress" },
+                table: "AspNetRoleClaims",
+                columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
                 values: new object[,]
                 {
-                    { 1, "Amman-1", "Jordan", "Hotel-1", "+962 798998989", "Amman-1", "Amman Street 1" },
-                    { 2, "Amman-2", "Jordan", "Hotel-2", "+962 778989884", "Amman-2", "Amman Street 2" },
-                    { 3, "Amman-3", "Jordan", "Hotel-3", "+962 789895441", "Amman-3", "Amman Street 3" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Rooms",
-                columns: new[] { "ID", "Layout", "Name" },
-                values: new object[,]
-                {
-                    { 1, 1, "Rome-1" },
-                    { 2, 2, "Rome-2" },
-                    { 3, 3, "Rome-3" }
+                    { 9, "permissions", "create", "client" },
+                    { 10, "permissions", "update", "client" },
+                    { 11, "permissions", "delete", "client" },
+                    { 12, "permissions", "create", "manager" },
+                    { 13, "permissions", "update", "manager" },
+                    { 14, "permissions", "create", "agent" },
+                    { 15, "permissions", "update", "agent" },
+                    { 16, "permissions", "delete", "agent" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -322,16 +244,6 @@ namespace Async_Inn_2.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HotelRoom_RoomID",
-                table: "HotelRoom",
-                column: "RoomID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RoomAmenity_AmenityID",
-                table: "RoomAmenity",
-                column: "AmenityID");
         }
 
         /// <inheritdoc />
@@ -353,25 +265,13 @@ namespace Async_Inn_2.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "HotelRoom");
-
-            migrationBuilder.DropTable(
-                name: "RoomAmenity");
+                name: "Stocks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Hotels");
-
-            migrationBuilder.DropTable(
-                name: "Amenities");
-
-            migrationBuilder.DropTable(
-                name: "Rooms");
         }
     }
 }

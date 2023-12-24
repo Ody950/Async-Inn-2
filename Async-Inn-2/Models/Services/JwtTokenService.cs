@@ -1,10 +1,9 @@
-﻿using Async_Inn_2.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace Async_Inn_2.Models.Services
+namespace JWT_D.Models.Services
 {
     public class JwtTokenService
     {

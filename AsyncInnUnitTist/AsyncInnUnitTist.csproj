@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Async-Inn-2\Async-Inn-2.csproj" />
+    <ProjectReference Include="..\Async-Inn-2\JWT_D.csproj" />
   </ItemGroup>
 
 </Project>

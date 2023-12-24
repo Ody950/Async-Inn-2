@@ -1,19 +1,18 @@
 
-using Async_Inn_2.Data;
-using Async_Inn_2.Models;
-using Async_Inn_2.Models.Interfaces;
-using Async_Inn_2.Models.Services;
-using FluentAssertions.Common;
+using JWT_D.Data;
+using JWT_D.Models;
+using JWT_D.Models.Interfaces;
+using JWT_D.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
 
-namespace Async_Inn_2
+namespace JWT_D
 
 {
     public class Program
-{
+    {
         public static void Main(string[] args)
 
         {
@@ -27,14 +26,14 @@ namespace Async_Inn_2
             string connString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             builder.Services
-                .AddDbContext<AsyncInnDbContext>
+                .AddDbContext<JWTDbContext>
                 (opions => opions.UseSqlServer(connString));
 
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<AsyncInnDbContext>();
+            }).AddEntityFrameworkStores<JWTDbContext>();
 
             builder.Services.AddScoped<JwtTokenService>();
 
@@ -61,10 +60,7 @@ namespace Async_Inn_2
 
 
             builder.Services.AddTransient<IUser, IdentityUserService>();
-            builder.Services.AddTransient<IAmenity, AmenityServices>();
-            builder.Services.AddTransient<IRoom, RoomServices>();
-            builder.Services.AddTransient<IHotel, HotelServices>();
-            builder.Services.AddTransient<IHotelRoom, HotelRoomServices>();
+            builder.Services.AddTransient<IStock, StockServices>();
 
             // registers Services
 
@@ -72,9 +68,29 @@ namespace Async_Inn_2
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
                 {
-                    Title = "Async Inn",
+                    Title = "JWT_D",
                     Version = "v1",
                 });
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "add the JWT TOKEN"
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+{{
+    new OpenApiSecurityScheme {
+    Reference=
+    new OpenApiReference{
+        Type=ReferenceType.SecurityScheme,
+        Id= "Bearer"
+}
+},
+new string[]{ } }
+});
             });
 
 
@@ -91,7 +107,7 @@ namespace Async_Inn_2
             app.UseSwaggerUI(aptions =>
             {
                 aptions.SwaggerEndpoint("/api/v1/swagger.json", "Async Inn");
-                aptions.RoutePrefix = "docs";
+                aptions.RoutePrefix = "";
             });
 
             app.MapControllers();
@@ -102,5 +118,5 @@ namespace Async_Inn_2
 
 
         }
-        }
     }
+}

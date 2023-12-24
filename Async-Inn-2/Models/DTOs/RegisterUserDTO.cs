@@ -1,4 +1,4 @@
-﻿namespace Async_Inn_2.Models.DTOs
+﻿namespace JWT_D.Models.DTOs
 {
     public class RegisterUserDTO
     {

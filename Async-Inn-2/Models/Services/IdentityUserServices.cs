@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using JWT_D.Models.DTOs;
+using JWT_D.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
-using Async_Inn_2.Models.Interfaces;
-using Async_Inn_2.Models.DTOs;
 
-namespace Async_Inn_2.Models.Services
+namespace JWT_D.Models.Services
 {
     public class IdentityUserService : IUser
     {
@@ -15,7 +15,7 @@ namespace Async_Inn_2.Models.Services
         public IdentityUserService(UserManager<ApplicationUser> manager, JwtTokenService tokenService)
         {
             userManager = manager;
-           this.tokenService = tokenService;
+            this.tokenService = tokenService;
         }
 
         public async Task<UserDTO> Register(RegisterUserDTO data, ModelStateDictionary modelState)
@@ -71,7 +71,7 @@ namespace Async_Inn_2.Models.Services
                     Id = user.Id,
                     Username = user.UserName,
                     Token = await tokenService.GetToken(user, System.TimeSpan.FromMinutes(5)),
-                     Roles = await userManager.GetRolesAsync(user)
+                    Roles = await userManager.GetRolesAsync(user)
                 };
             }
 
